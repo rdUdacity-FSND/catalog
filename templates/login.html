@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "header.html" %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="login-form-panel" id="gform_panel">
+            <form class="g-login-form">
+                <h3 class="g-login-form-header"> 
+                    {% if 'username' not in session %}
+                        Please Sign In
+                        <hr>
+                    {% endif %}
+                </h3>   
+                <div class="g-login-form-body">
+                <div id="signInButton">
+                    <span class="g-signin"
+                        data-scope="openid email"
+                        data-clientid={{cid}}
+                        data-redirecturi="postmessage"
+                        data-accesstype="offline"
+                        data-cookiepolicy="single_host_origin"
+                        data-callback="signInCallback"
+                        data-approvalpromt="force"
+                    </span>
+                </div>
+                </div>
+            </form>
+        </div>
+        <br>
+        <div class="row text-center">
+            <div col="col-xs-12 g-login-result" id="result"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Google Plus Sign In -->
+<script>
+function signInCallback(authResult) { 
+    if (authResult['code']) {
+        // Hide the sign-in button now that the user is authorized
+        $('#signInButton').attr('style', 'display: none');
+        // Hiding the panel also and header username message
+        $('#gform_panel').attr('style', 'display: none');
+        $('#uname-msg').attr('style', 'display: none');
+        // Send the one-time-use code to the server
+        $.ajax({
+            type: 'POST',
+            url: '/gconnect?state={{STATE}}',
+            processData: false,
+            data: authResult['code'],
+            contentType: 'application/octet-stream; charset=utf-8',
+            success: function(result) {
+                // Handle or verify the server response if necessary.
+                if (result) {
+                    $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+                    setTimeout(function() {
+                        window.location.href = "/catalog";
+                    }, 3000);
+          
+                } else if (authResult['error']) {
+                      console.log('There was an error: ' + authResult['error']);
+                } else {
+                      $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                }
+            }
+        }); 
+    } 
+}      
+</script>
+<!--End Google Plus Sign In-->
+{% endblock %}

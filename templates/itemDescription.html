@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "header.html" %}
+<section class="main-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default item-desc-panel">
+                <div class="panel-heading item-desc-panel-heading">
+                    <p>{{item.title}}</p>
+                </div>
+                <div class="panel-body item-desc-panel-body">
+                    {{item.description}}
+                    {% if current_user.is_authenticated and (session.user_id|int() == item.user_id|int()) %}
+                        <br>
+                        <a class="add-edit-del-link" href="{{ url_for('editItem', item_name=item.title) }}">Edit |</a>
+                        <a class="add-edit-del-link" href="{{ url_for('deleteItem', item_name=item.title) }}"> Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

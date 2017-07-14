@@ -1,0 +1,21 @@
+{% block content %}
+<div class="panel panel-default cat-item-panel">
+    <div class="panel-heading cat-item-list-heading">
+        Categories
+    </div>
+    <div class="panel-body cat-item-list-body">
+        {% if categories %}
+        <ul>
+            {% for category in categories %}
+            <li><a href=" {{ url_for('showCategory', category=category.name)}}">
+                {{category.name}}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No catagories to show</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

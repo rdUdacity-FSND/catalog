@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "header.html" %}
+{% if 'username' in session %}
+<h2> Are you sure you want to delete {{i_name}}? </h2>
+<br>
+
+<span>
+<form method ="post">
+    <a href = "{{url_for('homePage')}}"><button type="button" class="btn cancel-btn">Cancel</button></a>
+    <button type="submit" class="btn delete-btn" type="submit">Delete</button>
+</form>
+</span>
+{% else %}
+    <h1>You must be logged in to delete an item!</h1>
+    <a href="{{url_for('showCategory', category=item.category.name)}}" class="btn cancel-btn">Got it!  Thanks!</a>
+{% endif %}
+{% endblock %}

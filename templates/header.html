@@ -1,0 +1,41 @@
+
+<div class="row app-header">
+    <div class="col-xs-12">
+        <div class="row ph-flash-row">
+            <div class="col-xs-12 text-center ph-flash-msg">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul>
+                        {% for message in messages %}
+                            <li> <strong> {{ message }} </strong> </li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% endwith %}
+            </div>
+        </div>
+        <div class="row info-bx">
+            <div class="col-xs-6 text-left ph-info-name-bx">
+                <a href="{{url_for('homePage')}}" class="ph-info-name">Catalog App</a>
+            </div>
+            <div class="col-xs-6 text-right ph-info-acct-bx">
+                {%if 'username' not in session %}
+                        <a href="{{url_for('showLogin')}}" class="btn ph-info-log-btn">Log In</a>
+                {% else %}
+                        <div class="ph-info-user">
+                            <a href="{{url_for('disconnect')}}" class="btn ph-info-log-btn">Logout</a>
+                        </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row text-center ph-username-msg" id="uname-msg">
+            {% if 'username' in session %}
+                logged in as {{session.username}}
+            {% else %}
+                you are not logged in
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "header.html" %}
+<h1>Add a new Item</h1>
+<form method='post'>
+    <p>Title:</p>
+    <input type='text' name='title' placeholder='Enter Item Title' required>
+    <br>
+    <p>Description:</p>
+    <input type='text' name='description' placeholder='Enter Description' required>
+    <br>
+    <p>Category:</p>
+    <select type='text' name="cat_select" required>
+        <option value="">Select Category</option>
+        {% for category in categories %}
+        <option value="{{category.name}}">{{category.name}}</option>
+        {% endfor %}
+    </select>
+    <input type='submit' value='Add Item'>
+</form>
+{{cur_cat}}
+<a href="{{url_for('homePage')}}" class="btn cancel-btn">Cancel</a>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "header.html" %}
+{% if 'username' in session%}
+<h1>Edit {{item.title}}</h1>
+<form method='post'>
+    <p>Title:</p>
+    <input type='text' name='title' placeholder='{{item.title}}'>
+    <br>
+    <p>Description:</p>
+    <input type='text' name='description' placeholder='{{item.description}}'>
+    <br>
+    <p>Category:</p>
+    <select type="text" name="cat_select">
+        <option value="{{item.category.name}}">{{item.category.name}}</option>
+        {% for category in categories %}
+        <option value="{{category.name}}">{{category.name}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <br>
+    <input class="btn btn-primary" type='submit' value='Submit'>
+    <a href="{{url_for('showCategory', category=item.category.name)}}" class="btn cancel-btn">Cancel</a>
+</form>
+{% else %}
+    <h1>You are not authorized to edit this item!</h1>
+    <a href="{{url_for('showCategory', category=item.category.name)}}" class="btn cancel-btn">Got it!  Thanks!</a>
+{% endif %}
+{% endblock %}
