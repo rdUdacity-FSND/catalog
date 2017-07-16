@@ -18,7 +18,7 @@
 
 ## Project Environment and Prerequisites
  
-### Although it is not required, a Vagrant VM was used for development and the Vagrant file is included in the project.  The VM OS is Ubuntu 16.04.2 LTS (GNU/Linux 4.4.0-75-generic i686)
+### Although it is not required, a Vagrant VM was used for development.
 
 ### If you wish to use this envionment for the application, you will need both Vagrant and VirtualBox on your system.  Instructions for working with Vagrant VM's can be found here:
 
