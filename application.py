@@ -385,5 +385,5 @@ if __name__ == '__main__':
     app.secret_key = json.loads(
                         open('g_auth.json', 'r')
                         .read())['web']['client_secret']
-    app.debug = True
+    app.debug = False
     app.run(host='0.0.0.0', port=8000)
